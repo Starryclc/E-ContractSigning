@@ -25,12 +25,12 @@ App = {
 
 
   initContract: function() {
-    // 加载Election.json，保存了ABI及部署后的地址信息
-    $.getJSON("Election.json", function(election) {
+    // 加载EContract.json，保存了ABI及部署后的地址信息
+    $.getJSON("EContract.json", function(econtract) {
       // 初始化合约
-      App.contracts.Election = TruffleContract(election);
+      App.contracts.EContract = TruffleContract(econtract);
       // 连接与合约进行交互
-      App.contracts.Election.setProvider(App.web3Provider);
+      App.contracts.EContract.setProvider(App.web3Provider);
       App.listenForEvents();
       return App.render();
     });
@@ -39,7 +39,7 @@ App = {
 
     // 监听合约事件
     listenForEvents: function() {
-      App.contracts.Election.deployed().then(function(instance) {
+      App.contracts.EContract.deployed().then(function(instance) {
   
       });
     },
@@ -62,10 +62,10 @@ App = {
     });
 
 
-    App.contracts.Election.deployed().then(function (instance) {
-      electionInstance = instance;
+    App.contracts.EContract.deployed().then(function (instance) {
+      econtractInstance = instance;
       console.log(instance);
-      return electionInstance.e_contractCount();
+      return econtractInstance.e_contractCount();
     }).then(function (e_contractCount) { //获取电子合约内容
       var e_contractInfo = $("#e_contractInfo");
       e_contractInfo.empty();
@@ -73,7 +73,7 @@ App = {
       $("#e_contractCount").html("当前合同序号为: " + htt);  //获取电子合约序号
 
       for (var i = 1; i <= e_contractCount; i++) {
-        electionInstance.e_contracts(i).then(function (thisConInfo) {
+        econtractInstance.e_contracts(i).then(function (thisConInfo) {
           // tag=false;
           //  uint id;//合同编号
           //  uint createTime;//发布时间，用当前时间表示
@@ -164,7 +164,7 @@ quaryC: function() {  //给修改cookie中qID代表合同序号
     alert('乙方手机号手机号码有误，请重新填写！');
     return false;
   }else{
-  App.contracts.Election.deployed().then(function(instance) {
+  App.contracts.EContract.deployed().then(function(instance) {
     return instance.createEcontract(con,nickname1,nickname2,idCard1,idCard2,par1,par2,tel1,tel2,{gas: 3000000, from: userAccount});
   }).then(function(result) {
     console.log(accounts[0]); 
@@ -178,7 +178,7 @@ sign1: function() {
   var num1= $('#num1').val(); //获取合约序号
   var userAccount = web3.eth.accounts[0];
 
-  App.contracts.Election.deployed().then(function (instance) {
+  App.contracts.EContract.deployed().then(function (instance) {
     return instance.sign1(num1, {gas: 3000000, from: userAccount});
   }).then(function(result) {
     console.log(accounts[0]); 
@@ -190,7 +190,7 @@ sign1: function() {
 sign2: function() {
   var num2= $('#num2').val();
   var userAccount = web3.eth.accounts[0];
-  App.contracts.Election.deployed().then(function(instance) {
+  App.contracts.EContract.deployed().then(function(instance) {
     return instance.sign2(num2,{gas: 3000000, from: userAccount});
   }).then(function(result) {
     console.log(accounts[0]); 
@@ -202,7 +202,7 @@ sign2: function() {
 confirm1: function() {
   var confirm1= $('#confirm1').val();
   var userAccount = web3.eth.accounts[0];
-  App.contracts.Election.deployed().then(function(instance) {
+  App.contracts.EContract.deployed().then(function(instance) {
     return instance.confirm1(confirm1,{gas: 3000000, from: userAccount});
   }).then(function(result) {
     // Wait for to update
@@ -215,7 +215,7 @@ confirm1: function() {
 confirm2: function() {
   var confirm2= $('#confirm2').val();
   var userAccount = web3.eth.accounts[0];
-  App.contracts.Election.deployed().then(function(instance) {
+  App.contracts.EContract.deployed().then(function(instance) {
     return instance.confirm2(confirm2,{gas: 3000000, from: userAccount});
   }).then(function(result) {
     // Wait for to update

@@ -1,6 +1,6 @@
 pragma solidity ^0.5.0;
 
-contract Election{
+contract EContract{
     string public name;
     uint public e_contractCount = 0;
     mapping (uint => EContract) public e_contracts;//合同索引
