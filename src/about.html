@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
+</head>
+<body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">电子合同签署平台</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="http://localhost:3000/index.html">首页</a></li>
+                    <li class=><a href="http://localhost:3000/introduction.html">流程介绍</a></li>
+                    <li class="active"><a href="http://localhost:3000/about.html">关于</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="jumbotron">
+            <h1>关于</h1>
+        </div>
+        <div class="row">
+            <div class="col-xs-3" id="myScrollspy">
+                <ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="125">
+                    <li><a href="#section-1">合同发布</a></li>
+                    <li><a href="#section-2">合同签署</a></li>
+                    <li><a href="#section-3">合同确认</a></li>
+                    <li ><a href="#section-4">合同查询</a></li>
+                </ul>
+            </div>
+
+            <div class="col-xs-9">
+                <h2 id="section-1">合同发布</h2>
+                <p>该平台可以由在区块链上的用户发布合同，需要填写如下内容：<br>
+                    -甲乙双方的姓名、电话、身份证号码<br>
+                    -甲乙双方的区块链账户(地址)<br>
+                    -合同内容<br>
+                    合同发布消耗gas，成功发布后返回一个合同序号，通过序号即可查询合同状态和内容。
+                </p>
+                <hr>
+
+                <h2 id="section-2">合同签署</h2>
+                <p>
+                    合同发布后需要经过甲乙双方的签署和再次确认才可生效。<br>
+                    通过合约序号查询合同。然后进入相应的甲乙双方签署过程。<br>
+                <p class="alert alert-danger">
+                    注：请注意使用合约中的甲乙双方对应账号进入合同签署，否则合同签署将会失败。失败次数过多本合同便会失效。</p>
+                <hr>
+
+                <h2 id="section-3">合同确认</h2>
+                <p>双方都完成签署后还需要再二次确认。二次确认之后合同才成功签署。</p>
+                <p class="alert alert-danger">
+                    注：请注意使用合同中的甲乙双方对应账号进入合约确认，否则合同确认将会失败。失败次数过多本合同便会失效。</p>
+                <hr>
+                <h2 id="section-4">合同查询</h2>
+                <p>发布合同后按照合同序号即可在合同查询界面查询合同内容。如果该序号确实为已经发布过的合同，则会返回合同内容。<br>
+                    合同内容中的合约状态分别对应于合约所进行到的不同阶段：<br>
+                    -新创建：合同刚刚发布。合同涉及到的甲乙双方未进行任何签署或确认操作。
+                    -待确认：合同甲乙双方已经进入签署流程。即一方已经签署或者双方均已签署。
+                    -一方已确认：合同双方完成签署进入确认流程，只有一方完成确认，等待另一方确认合同。
+                    -双方签署成功：双方已经完成签署过程和再次确认过程。合同签署完成生效。
+                    -失效：错误执行过多次数导致该合约失效。
+                </p>
+                <hr>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

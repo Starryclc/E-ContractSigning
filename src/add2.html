@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>乙方签署合同</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">电子合同签署平台</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="http://localhost:3000/index.html">首页</a></li>
+        <li ><a href="http://localhost:3000/introduction.html">流程介绍</a></li>
+        <li class="active"><a href="http://localhost:3000/about.html">关于</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container" style="width: 1350px;">
+  <div class="row">
+    <div class="col-lg-12" >
+      <div class="jumbotron">
+        <h1 class="text-center">乙方签署合同</h1>
+      </div>
+
+      <form onSubmit="App.sign2();">
+        <div class="form-group">
+          <br>
+          <label for="num2">输入合同序列号</label>
+          <input type="text"  style="width:1350px; height:40px;" class="form-control" id="num2" placeholder="序列号">
+          <br>
+        </div>
+        <input type="submit" class="btn btn-primary" value="签署">
+        <hr>
+      </form>
+      <br>
+      <br>
+
+      <div class="form-group" style="text-align:center;vertical-align:middle;" >
+        <a href="./index2.html">
+          <button class="btn btn-primary" >返回主界面</button>
+        </a>
+        <a href="./query.html">
+          <button class="btn btn-primary" >返回查询页面</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
