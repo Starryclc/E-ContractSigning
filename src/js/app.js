@@ -71,23 +71,11 @@ App = {
       e_contractInfo.empty();
       var htt = Number(e_contractCount) + 1;
       $("#e_contractCount").html("当前合同序号为: " + htt);  //获取电子合约序号
+      var rela = $("#relative");
+      rela.empty();
 
       for (var i = 1; i <= e_contractCount; i++) {
         econtractInstance.e_contracts(i).then(function (thisConInfo) {
-          // tag=false;
-          //  uint id;//合同编号
-          //  uint createTime;//发布时间，用当前时间表示
-          //  string content;//内容
-          //  uint state;//合同状态。0：新创建   1：待确认-双方签字后  2：已签署-签字后-双方确认
-          //  string nickname1;//签署姓名1
-          //  string nickname2;//签署姓名2
-          //  uint idCard1;//身份证信息1
-          //  uint idCard2;//身份证信息1
-          //  address  par1;//签署地址1
-          //  address  par2;//签署地址2
-          //  uint tel1;//联系方式1
-          //  uint tel2;//联系方式2
-          // cargoNames
 
           var id = thisConInfo[0];
           var createTime = thisConInfo[1];
@@ -128,6 +116,16 @@ App = {
           if (id == qID) {
             e_contractInfo.append(infoTemplate);
           }
+
+          var acc = $("#accountAddress").html();
+          console.log(acc);
+          console.log(par2);
+          console.log(par1==acc || par2==acc);
+          if(par1==acc || par2==acc){
+            console.log("!!!!")
+            $("#relative").append(id+"<br>");
+          }
+
         });
       }
     })
