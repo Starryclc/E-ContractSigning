@@ -71,59 +71,63 @@ App = {
       e_contractInfo.empty();
       var htt = Number(e_contractCount) + 1;
       $("#e_contractCount").html("当前合同序号为: " + htt);  //获取电子合约序号
-      var rela = $("#relative");
-      rela.empty();
-
+      var acc = App.account;
+      var count=0;
       for (var i = 1; i <= e_contractCount; i++) {
         econtractInstance.e_contracts(i).then(function (thisConInfo) {
-
+          console.log(thisConInfo);
           var id = thisConInfo[0];
           var createTime = thisConInfo[1];
           var content = thisConInfo[2];
-          var state = thisConInfo[3];
-          var nickname1 = thisConInfo[4];
-          var nickname2 = thisConInfo[5];
-          var idCard1 = thisConInfo[6];
-          var idCard2 = thisConInfo[7];
-          var par1 = thisConInfo[8];
-          var par2 = thisConInfo[9];
-          var tel1 = thisConInfo[10];
-          var tel2 = thisConInfo[11];
+          var state1 = thisConInfo[3];
+          var state2 = thisConInfo[4]
+          var nickname1 = thisConInfo[5];
+          var nickname2 = thisConInfo[6];
+          var idCard1 = thisConInfo[7];
+          var idCard2 = thisConInfo[8];
+          var par1 = thisConInfo[9];
+          var par2 = thisConInfo[10];
 
-          if (state == 0) {
+          if (state1 == 0 && state2==0) {
             var state = '新创建';
-          }
-          if (state == 1 ) {
-            var state = '一方已签署';
-          }
-          if (state==2){
-            var state='双方已签署';
-          }
-          if (state == 3) {
-            var state = '一方已确认';
-          }
-          if (state == 4) {
-            var state = '双方已签署成功';
+          } else if (state1 == 1 && state2==0 ) {
+            var state = '甲方已签署等待乙方签署';
+          }else if (state1==0&&state2==1){
+            var state='乙方已签署等待甲方签署';
+          } else if (state1 == 1&& state2==1) {
+            var state = '已签署待确认';
+          } else if (state1 == 2&&state2==1) {
+            var state = '甲方已确认等待乙方确认';
+          }else if(state1==1&&state2==2){
+            var state = '乙方已确认等待甲方确认';
+          }else if(state1==2&&state2==2){
+            var state='已生效';
           }
 
           var unixTimestamp = new Date(createTime * 1000);
           var createTime = unixTimestamp.toLocaleString()
-          var infoTemplate =
-              " <tr><td width='1309px'  align=center ><font size=3 >"
-              + "当前合同状态：" + state + "</font></td></tr>    <tr><td><font size=3 >" + "甲方姓名：   " + nickname1 + "</font></td></tr>    <tr><td><font size=3 >" + "乙方姓名：   " + nickname2 + "</font></td></tr>   <tr><td><font size=3 >" + "甲方电话:" + tel1 + "</font></td></tr>   <tr><td><font size=3 >" + "乙方电话：" + tel2 + "</font></td></tr>     <tr><td><font size=3 >" + "甲方身份证号：" + idCard1 + "</font></td></tr>   <tr><td><font size=3 >" + "乙方身份证号：" + idCard2 + "</font></td></tr>    <tr><td><font size=3 >" + "甲方区块链地址：   " + par1 + "</font></td></tr>     <tr><td><font size=3 >" + "乙方区块链地址：   " + par2 + "</font></td></tr>    <tr><td><font size=3 >" + "合同创建时间：   " + createTime + "</font></td></tr>     <tr><td><font size=3 >" + "合同序号：   " + id + "</font></td></tr>      <tr><td><font size=3 >" + "合同内容：   " + content + "</font></td></tr>      "
+          var infoTemplate ="<table border='3' align='center' style='font-size: large'><tr><td align='left'>"
+          + "当前合同状态：" + state + "</td></tr><tr><td align='left'>"
+              + "合同序号：   " + id + "</td></tr><tr><td align='left'>"
+              + "甲方姓名：   " + nickname1 +"</td></tr><tr><td align='left'>"
+              + "乙方姓名：   " + nickname2 + "</td></tr> <tr><td align='left'>"
+              + "甲方身份证号：" + idCard1 + "</td></tr> <tr><td align='left'>"
+              + "乙方身份证号：" + idCard2 + "</td></tr> <tr><td align='left'>"
+              + "甲方区块链地址：   " + par1 + "</td></tr> <tr><td align='left'>"
+              + "乙方区块链地址：   " + par2 + "</td></tr> <tr><td align='left'>"
+              + "合同创建时间：   " + createTime + "</td></tr> <tr><td align='left'>"
+              + "合同内容：   " + content + "</td align='left'></tr> </table> "
 
           var qID = document.cookie.split(";")[0].split("=")[1]; //获得cookie中的qID
           if (id == qID) {
             e_contractInfo.append(infoTemplate);
           }
 
-          var acc = $("#accountAddress").html();
-          console.log(acc);
-          console.log(par2);
-          console.log(par1==acc || par2==acc);
-          if(par1==acc || par2==acc){
-            console.log("!!!!")
-            $("#relative").append(id+"<br>");
+
+          if(par1==acc){
+              $("#relative").append("<tr><td align='center'>" + id + "</td><td align='center'>" + state + "</td><td align='center'>" + "甲方" + "</td></tr>");
+          }else if(par2==acc){
+            $("#relative").append("<tr ><td align='center'>" + id + "</td><td align='center'>" + state + "</td><td align='center'>" + "乙方" + "</td></tr>");
           }
 
         });
@@ -141,8 +145,6 @@ quaryC: function() {  //给修改cookie中qID代表合同序号
   var nickname2= $('#nickname2').val();
   var idCard1= $('#idCard1').val();
   var idCard2= $('#idCard2').val();
-  var tel1= $('#tel1').val();
-  var tel2= $('#tel2').val();
   var con= $('#con').val();
   var par1= $('#par1').val();
   var par2= $('#par2').val();
@@ -152,18 +154,12 @@ quaryC: function() {  //给修改cookie中qID代表合同序号
   if((idCard1.length) != 18){
     alert('甲方身份证号码长度有误，请重新填写！');
     return false;
-  }else if(!(reg.test(tel1))){
-    alert('甲方手机号手机号码有误，请重新填写！');
-    return false;
   }else if((idCard2.length)!=18){
     alert('乙方身份证号码长度有误，请重新填写！');
     return false;
-  }else if(!(reg.test(tel2))){
-    alert('乙方手机号手机号码有误，请重新填写！');
-    return false;
   }else{
   App.contracts.EContract.deployed().then(function(instance) {
-    return instance.createEcontract(con,nickname1,nickname2,idCard1,idCard2,par1,par2,tel1,tel2,{gas: 3000000, from: userAccount});
+    return instance.createEcontract(con,nickname1,nickname2,idCard1,idCard2,par1,par2,{gas: 3000000, from: userAccount});
   }).then(function(result) {
     console.log(accounts[0]); 
   }).catch(function(err) {
