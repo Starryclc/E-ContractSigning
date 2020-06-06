@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>发布合同</title>
-    <!-- Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css" >
   </head>
 
@@ -26,7 +25,7 @@
       </div>
     </nav>
 
-    <div class="container" style="width: 1350px;">
+    <div class="container">
       <div class="row">
         <div class="col-lg-12" >
           <div class="jumbotron">
@@ -43,48 +42,57 @@
 
           <hr>
           <br>
+        <table border="3" align="center" >
+              <form onSubmit="App.createC();" >
+                <div class="form-group" style="text-align: left;vertical-align: middle;">
+                    <tr>
+                        <th style="font-size: x-large">甲方信息</th>
+                        <th style="font-size: x-large">乙方信息</th>
+                    </tr>
+                    <tr>
+                        <td>
+                          <label for="nickname1">请输入甲方姓名:</label>
+                          <input type="text"  class="form-control" id="nickname1" placeholder="输入甲方姓名">
+                          <hr>
+                          <label for="idCard1">请输入甲方身份证号</label>
+                          <input type="text"   class="form-control" id="idCard1" placeholder="输入身份证号">
+                          <hr>
+                          <label for="par1">请输入甲方地址</label>
+                          <input type="text"  class="form-control" id="par1" placeholder="输入区块链地址">
+                          <hr>
+                        </td>
+                        <td>
+                          <label for="nickname2">请输入乙方姓名</label>
+                          <input type="text"  class="form-control" id="nickname2" placeholder="输入姓名">
+                          <hr>
 
-          <form onSubmit="App.createC();" >
-            <div class="form-group" style="text-align: left;vertical-align: middle;">
-              <label for="nickname1">请输入甲方姓名</label>
-              <input type="text"  class="form-control" id="nickname1" placeholder="输入姓名">
-              <br>
-
-              <label for="idCard1">请输入甲方身份证号</label>
-              <input type="text"   class="form-control" id="idCard1" placeholder="输入身份证号">
-              <br>
-
-              <label for="par1">请输入甲方地址</label>
-              <input type="text"  class="form-control" id="par1" placeholder="输入区块链地址">
-              <br>
-              <hr>
-
-              <label for="nickname2">请输入乙方姓名</label>
-              <input type="text"  class="form-control" id="nickname2" placeholder="输入姓名">
-              <br>
-
-              <label for="idCard2">请输入乙方身份证号</label>
-              <input type="text"   class="form-control" id="idCard2" placeholder="输入身份证号">
-
-              <br>
-
-              <label for="par2">请输入乙方地址</label>
-              <input type="text"  class="form-control" id="par2" placeholder="输入区块链地址">
-              <br>
-              <hr>
-
-              <label for="con">请输入合同内容</label>
-              <input type="text"  style="width:1350px; height:100px;" class="form-control" id="con" placeholder="输入内容">
-              <br>
-            </div>
-            <input type="submit" class="btn btn-primary" value="发布合同">
-            <hr>
-           </form>
-
+                          <label for="idCard2">请输入乙方身份证号</label>
+                          <input type="text"   class="form-control" id="idCard2" placeholder="输入身份证号">
+                          <hr>
+                          <label for="par2">请输入乙方地址</label>
+                          <input type="text"  class="form-control" id="par2" placeholder="输入区块链地址">
+                          <hr>
+                         </td>
+                    </tr>
+                    <tr>
+                         <td colspan="2" style="font-size: x-large">
+                          <label for="con">请输入合同内容</label>
+                          <input type="text"  style="width:80em; height:25em;" class="form-control" id="con" placeholder="输入内容">
+                          <br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <input type="submit" class="btn btn-primary" value="发布合同">
+                        </td>
+                    </tr>
+              </div>
+               </form>
+        </table>
             <br>
             <br>
             
-          <div class="form-group" style="text-align:center;vertical-align:middle;" >
+          <div class="form-group" style="text-align:center" >
               <a href="./index2.html">
                 <button class="btn btn-primary" >返回主页面</button>
             </a>

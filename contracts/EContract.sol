@@ -4,7 +4,7 @@ contract EContract{
     string public name;
     uint public e_contractCount = 0;
     mapping (uint => econ) public e_contracts;//合同索引
-
+    address public admin;
     struct econ {
          uint id;//合同编号
          uint createTime;//发布时间，用当前时间表示
@@ -19,13 +19,10 @@ contract EContract{
          address  par2;//签署地址2
     }
 
-    //管理员地址
-   address owner;
 
    //构造函数
     constructor () public {
-        name = "Decentralized Systems";
-        owner=msg.sender;
+        admin=msg.sender;
     }
 
     //创建合同
@@ -39,29 +36,46 @@ contract EContract{
 
 
     //地址1签署合同
-    function sign1 (uint snum) public {
-        require(e_contracts[snum].par1 == msg.sender && e_contracts[snum].state1==0);
-        e_contracts[snum].state1 += 1;
+    function sign1 (uint num) public {
+        require(e_contracts[num].par1 == msg.sender && e_contracts[num].state1==0);
+        e_contracts[num].state1 += 1;
     }
 
 
     //地址2签署合同
-    function sign2 (uint snum) public {
-         require(e_contracts[snum].par2 == msg.sender && e_contracts[snum].state2==0);
-         e_contracts[snum].state2 += 1;
+    function sign2 (uint num) public {
+         require(e_contracts[num].par2 == msg.sender && e_contracts[num].state2==0);
+         e_contracts[num].state2 += 1;
     }
 
     //地址1确认合同
-    function confirm1 (uint snum) public {
-        require(e_contracts[snum].par1 == msg.sender
-        && (e_contracts[snum].state1==1&&(e_contracts[snum].state2>0)));
-        e_contracts[snum].state1 += 1;
+    function confirm1 (uint num) public {
+        require(e_contracts[num].par1 == msg.sender
+        && (e_contracts[num].state1==1&&(e_contracts[num].state2>0)));
+        e_contracts[num].state1 += 1;
     }
 
     //地址2确认合同
-    function confirm2 (uint snum) public {
-         require(e_contracts[snum].par2 == msg.sender
-         && (e_contracts[snum].state2==1&&(e_contracts[snum].state1>0)));
-         e_contracts[snum].state2 += 1;
+    function confirm2 (uint num) public {
+         require(e_contracts[num].par2 == msg.sender
+         && (e_contracts[num].state2==1&&(e_contracts[num].state1>0)));
+         e_contracts[num].state2 += 1;
     }
+
+
+
+    //管理员批准合同
+    function pass(uint num) public {
+        require(admin==msg.sender);
+        e_contracts[num].state1=3;
+        e_contracts[num].state2=3;
+    }
+
+
+    //管理员未批准=>已中止
+     function reject(uint num) public {
+            require(admin==msg.sender);
+            e_contracts[num].state1=4;
+            e_contracts[num].state2=4;
+        }
 } 

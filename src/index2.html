@@ -33,6 +33,7 @@
 
     <div class="container" align="center">
       <div class="jumbotron">
+        <p id="admin" class="text-center"></p>
         <p id="accountAddress" class="text-center"></p>
         <p id="accBalance" class="text-center"></p>
 
@@ -60,7 +61,12 @@
         <a href="./confirm2.html">
           <button class="btn btn-primary" >乙方确认</button>
         </a>
+        <br>
+        <br>
 
+        <a href="./admin.html">
+          <button class="btn btn-primary" >管理员审核</button>
+        </a>
       </div>
     </div>
     <div class="container">
@@ -72,10 +78,21 @@
             <th align="center">合同状态</th>
             <th align="center">甲方/乙方</th>
           </tr>
-
         </table>
-
       </div>
+    </div>
+    <div class="container">
+        <div class="jumbotron">
+            <h3 class="text-center">全部合同</h3>
+            <table border="3" id="all" style="font-size: large" align="center">
+                <tr>
+                    <th align="center">合同序号</th>
+                    <th align="center">合同状态</th>
+                </tr>
+
+            </table>
+
+        </div>
     </div>
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
