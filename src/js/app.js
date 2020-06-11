@@ -4,7 +4,6 @@ App = {
   contracts: {},
   account: '0x0',
   admin: null,
-  info: {},
 
   init: function() {
     return App.initWeb3();
@@ -40,7 +39,7 @@ App = {
      } else if (state1 == 1 && state2==0 ) {
          var state = '甲方已签署等待乙方签署';
      }else if (state1==0&&state2==1){
-         var state='c';
+         var state='乙方已签署等待甲方签署';
      } else if (state1 == 1&& state2==1) {
          var state = '已签署待确认';
      } else if (state1 == 2&&state2==1) {
@@ -161,11 +160,11 @@ createC: function() {
 quary: function() {
    qID= $('#qID').val();
     var userAccount = web3.eth.accounts[0];
-    console.log("!!");
+    //console.log("!!");
     App.contracts.EContract.deployed().then(function (instance) {
         instance.e_contracts(qID).then(function (thisConInfo) {
             console.log(thisConInfo);
-            if(thisConInfo==null){
+            if(thisConInfo[5]==""){
                 alert("未查询到当前合同，请检查合同序号");
             }else{
             var id = thisConInfo[0];
@@ -204,7 +203,7 @@ quary: function() {
         )
     });
  },
-    
+
 //甲方签署
 sign1: function() {
   var num1= $('#num1').val(); //获取合约序号
